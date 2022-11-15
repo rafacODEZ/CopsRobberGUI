@@ -152,25 +152,25 @@ class imageCanvas(Frame):
 
         playersTurn = player
         if playersTurn == "start_image":
-            playersTurn = Image.open("start_image.jpg")
+            playersTurn = Image.open("./assets/start_image.jpg")
 
         elif playersTurn == "Cop":
-            playersTurn = Image.open("cop.jpg")
+            playersTurn = Image.open("./assets/cop.jpg")
 
         elif playersTurn == "Cop_2":
-            playersTurn = Image.open("cop_2.jpg")
+            playersTurn = Image.open("./assets/cop_2.jpg")
 
         elif playersTurn == "Robber":
-            playersTurn = Image.open("robber.jpg")
+            playersTurn = Image.open("./assets/robber.jpg")
 
         elif playersTurn == "Robber_2":
-            playersTurn = Image.open("robber_2.jpg")
+            playersTurn = Image.open("./assets/robber_2.jpg")
 
         elif playersTurn == "CopWon":
-            playersTurn = Image.open("robber_won_2.jpg")
+            playersTurn = Image.open("./assets/robber_won_2.jpg")
 
         elif playersTurn == "RobberWon":
-            playersTurn = Image.open("robber_won.jpg")
+            playersTurn = Image.open("./assets/robber_won.jpg")
 
         return playersTurn
 
