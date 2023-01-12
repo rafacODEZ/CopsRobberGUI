@@ -17,7 +17,7 @@ class CopRobGraphics:
 
         root = Tk()  # start event loop
         root.title("Cop and Robber")
-        root.geometry("1100x590")
+        root.geometry("1050x510")
         root.resizable(False, False)
         self.screen = root
 
