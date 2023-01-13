@@ -8,17 +8,21 @@ from CopRobConsole import *
 from tkinter import *
 from random import randint
 from PIL import Image, ImageTk
+from platform import system
 
 
 class CopRobGraphics:
 
     def __init__(self):
         self.copRob = CopRobGame(None)
+        self.os = system()
+
+        print(self.os)
 
         root = Tk()  # start event loop
         root.title("Cop and Robber")
         root.geometry("1050x510")
-        root.resizable(False, False)
+        # root.resizable(False, False)
         self.screen = root
 
         self.welcomeFrame = Frame(root)
