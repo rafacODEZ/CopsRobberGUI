@@ -27,8 +27,8 @@ class CopRobGame:
 ####################################################################################################################
 ############################                Parts of The Game                              #########################
 
-    def gameIntro(self):
-        self.UI.printIntro()
+    def introduction(self):
+        self.UI.introMSG()
 
         moves = self.UI.moveLimitQuestion()
         self.movesAllowed = moves
@@ -185,8 +185,7 @@ class CopRobGame:
         self.UI.dividers()
         self.UI.dividers()
 
-####################################################################################################################
-############################            Get Information Methods & Who's Turn               #########################
+###################### Get Information Methods & Who's Turn #########################
 
     def getVertex(self):
         return self.vertex
@@ -265,8 +264,7 @@ class CopRobGame:
         self.playersTurn = "Cop"
         self.UI = UserInterface()
 
-####################################################################################################################
-############################                    Required Methods                           #########################
+####################   Required Methods   #########################
 
     def createVertex(self, vertex):
         self.vertex.append(vertex)
@@ -275,10 +273,13 @@ class CopRobGame:
         newVertex = False
         if vertex1 == vertex2:
             pass
+
         elif vertex1 not in self.vertex or vertex2 not in self.vertex:
             pass
+
         elif (vertex1, vertex2) in self.edges or (vertex2, vertex1) in self.edges:
             pass
+
         else:
             self.edges.append((vertex1, vertex2))
             newVertex = True
@@ -343,30 +344,31 @@ class UserInterface:
 
     #############################               Intro & How-To Prints                         ############################
 
-    def printIntro(self):
+    def introMSG(self):
+
         welcomeMSG = (
-            "               - Welcome to Cop and Robber -                   "
-            + "\n                                                           "
-            + "\nCop and Robber is a 2-player game, one player is a Cop     "
-            + "\nthe other the Robber. The game can be played on any graph, "
-            + "\ncreated by the player before the start of the game. First  "
-            + "\nthe player must enter the number of moves the cop is       "
-            + "\nallowed to make. Then create vertices and edges. After     "
-            + "\ncreating the vertices and edges (creating a graph) the     "
-            + "\nCop and Robber are allowed to place themselves on any of   "
-            + "\nthe created vertices. Once both players are on the graph   "
-            + "\nthey will be allowed to move to an adjacent vertex. The    "
-            + "\nplayers will alternate moving vertex to vertex starting    "
-            + "\nwith the Cop. Both players take turns until either the Cop "
-            + "\noccpies the same vertex as the Robber (Cop wins),the cop   "
-            + "\ngives up by typing 'cop gives up' on his turn (Robber wins)"
-            + "\n       or the Cop runs out of moves (Robber wins).         "
-            + "\n                                                           "
-            + "\n                   Good luck!                              "
-            + "\n             May the odds be in your favor.                "
-            + "\n                                                           "
-            + "\n               Click continue to play!!                    "
+            "- Welcome to Cop and Robber "
+            "\nCop and Robber is a 2-player game, one player is a Cop"
+            "\nthe other the Robber. The game can be played on any graph, "
+            "\ncreated by the player before the start of the game. First  "
+            "\nthe player must enter the number of moves the cop is       "
+            "\nallowed to make. Then create vertices and edges. After     "
+            "\ncreating the vertices and edges (creating a graph) the     "
+            "\nCop and Robber are allowed to place themselves on any of   "
+            "\nthe created vertices. Once both players are on the graph   "
+            "\nthey will be allowed to move to an adjacent vertex. The    "
+            "\nplayers will alternate moving vertex to vertex starting    "
+            "\nwith the Cop. Both players take turns until either the Cop "
+            "\noccpies the same vertex as the Robber (Cop wins),the cop   "
+            "\ngives up by typing 'cop gives up' on his turn (Robber wins)"
+            "\n       or the Cop runs out of moves (Robber wins).         "
+            "\n                                                           "
+            "\n                      Good luck!                           "
+            "\n             May the odds be in your favor.                "
+            "\n                                                           "
+            "\n               Click continue to play!!                    "
         )
+
         return welcomeMSG
 
     def questionExplained(self, whichQuestion):
