@@ -1,6 +1,6 @@
 '''
-Cop and Robebr Game - Graphics Version
-Done by: Rafa Cruz
+Cop and Robber Game - (Graphical Version)
+Done by: Rafael De La Cruz
 Min Resolution of (1050 x 510)
 **not scalable**
 '''
@@ -16,21 +16,24 @@ class CopRobGraphics:
     def __init__(self):
         self.copRob = CopRobGame(None)
         self.os = system()
-
-        print(self.os)
+        # self.windowSize = self.getWindowSize()
 
         root = Tk()  # start event loop
         root.title("Cop and Robber")
-        root.geometry("1050x510")
+        root.geometry(self.getWindowSize())
         # root.resizable(False, False)
         self.screen = root
 
         self.welcomeFrame = Frame(root)
         self.welcomeFrame.place(x=340, y=20)
 
-        welcomeMSG = self.copRob.UI.printIntro()
+        welcomeMSG = self.copRob.UI.introMSG()
         welcomeLabel = Label(
-            self.welcomeFrame, text=welcomeMSG, justify=CENTER, font=("Helvetica", 16))
+            self.welcomeFrame,
+            text=welcomeMSG,
+            justify=CENTER,
+            font=("Helvetica", 16))
+
         welcomeLabel.pack()
 
         continueButton = Button(self.welcomeFrame, text="Continue")
@@ -38,6 +41,12 @@ class CopRobGraphics:
         continueButton.bind("<Button-1>", self.startGame)
 
         root.mainloop()
+
+    def getWindowSize(self):
+        if self.os == "Darwin":  # mac/linux
+            return "1050x510"
+        else:
+            return "1190x510"
 
     def startGame(self, event):
         self.welcomeFrame.place_forget()
@@ -55,19 +64,24 @@ class CopRobGraphics:
         self.mainFrame.place(x=650, y=367)
 
         self.moveSection = movePlayerSection(
-            self.mainFrame, self.copRob, self.imageCanvas, self.msgCanv)
+            self.mainFrame, self.copRob,
+            self.imageCanvas, self.msgCanv)
 
         self.playersSection = playerPositionSection(
-            self.mainFrame, self.copRob, self.moveSection, self.msgCanv)
+            self.mainFrame, self.copRob,
+            self.moveSection, self.msgCanv)
 
         self.edgesSection = createEdgeSection(
-            self.mainFrame, self.copRob, self.playersSection, self.msgCanv)
+            self.mainFrame, self.copRob,
+            self.playersSection, self.msgCanv)
 
         self.vertexSection = createVertexSection(
-            self.mainFrame, self.copRob, self.edgesSection, self.msgCanv)
+            self.mainFrame, self.copRob,
+            self.edgesSection, self.msgCanv)
 
         self.move = movesAllowedSection(
-            self.mainFrame, self.copRob, self.vertexSection, self.msgCanv)
+            self.mainFrame, self.copRob,
+            self.vertexSection, self.msgCanv)
 
         root.mainloop()  # ends event loop
 
@@ -90,7 +104,7 @@ class msgCanvas(Frame):
         self.resultsBox['wraplength'] = 258
         self.resultsBox['relief'] = SUNKEN
         self.resultsBox['width'] = 48
-        self.resultsBox['height'] = 10
+        self.resultsBox['height'] = 8
 
     def msgBox(self):
         self.messageString = StringVar()
@@ -100,7 +114,8 @@ class msgCanvas(Frame):
         self.messageBox['font'] = ("Helvetica", 14)
         self.messageBox['relief'] = SUNKEN
         self.messageBox['width'] = 48
-        self.messageBox['height'] = 11
+        # self.messageBox['height'] = 11 Good for Mac
+        self.messageBox['height'] = 8
 
     def introMSG(self, messageDisplay):
 
@@ -153,30 +168,16 @@ class imageCanvas(Frame):
         self.panel.place(x=1, y=2)
 
     def displayPlayer(self, player):
+        displayPhoto = {"start_image": "./assets/start_image.jpg",
+                        "Cop": "./assets/cop.jpg",
+                        "Cop_2": "./assets/cop_2.jpg",
+                        "Robber": "./assets/robber.jpg",
+                        "Robber_2": "./assets/robber_2.jpg",
+                        "CopWon": "./assets/robber_won_2.jpg",
+                        "RobberWon": "./assets/robber_won.jpg"}
 
-        playersTurn = player
-        if playersTurn == "start_image":
-            playersTurn = Image.open("./assets/start_image.jpg")
-
-        elif playersTurn == "Cop":
-            playersTurn = Image.open("./assets/cop.jpg")
-
-        elif playersTurn == "Cop_2":
-            playersTurn = Image.open("./assets/cop_2.jpg")
-
-        elif playersTurn == "Robber":
-            playersTurn = Image.open("./assets/robber.jpg")
-
-        elif playersTurn == "Robber_2":
-            playersTurn = Image.open("./assets/robber_2.jpg")
-
-        elif playersTurn == "CopWon":
-            playersTurn = Image.open("./assets/robber_won_2.jpg")
-
-        elif playersTurn == "RobberWon":
-            playersTurn = Image.open("./assets/robber_won.jpg")
-
-        return playersTurn
+        assert (player in displayPhoto)
+        return Image.open(displayPhoto[player])
 
     def changeImage(self, player):
 
@@ -286,18 +287,18 @@ class createVertexSection:
         self.vertexEntryBox.grid(row=2, column=1, sticky="w")
         self.vertexDoneButton.grid(row=2, column=2, sticky="w")
 
-    def createVertex(self, event):
+    def createVertex(self, event):  # working on
 
-        self.vertex = self.vertexEntryBox.get()
+        vertex = self.vertexEntryBox.get()
 
         checkList = ['', "Vertex Created", "Vertex already exist",
                      'hit "RETURN" to create vertex', 'Disabled']
 
-        if self.vertex in checkList:
+        if vertex in checkList:
             pass
 
-        elif self.vertex not in self.copRob.vertex:
-            self.copRob.createVertex(self.vertex)
+        elif vertex not in self.copRob.vertex:
+            self.copRob.createVertex(vertex)
             self.vertexEntryBox.delete(0, END)
             self.vertexEntryBox.insert(0, "Vertex Created")
             self.msgCan.updateResults()
