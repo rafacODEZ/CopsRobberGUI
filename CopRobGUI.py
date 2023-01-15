@@ -92,6 +92,7 @@ class msgCanvas(Frame):
         Frame.__init__(self, root)
         self.copRob = copRob
         self.root = root
+        self.height = self.textBoxHeight()
         self.resultBox()
         self.msgBox()
 
@@ -104,7 +105,7 @@ class msgCanvas(Frame):
         self.resultsBox['wraplength'] = 258
         self.resultsBox['relief'] = SUNKEN
         self.resultsBox['width'] = 48
-        self.resultsBox['height'] = 8
+        self.resultsBox['height'] = self.height
 
     def msgBox(self):
         self.messageString = StringVar()
@@ -114,8 +115,13 @@ class msgCanvas(Frame):
         self.messageBox['font'] = ("Helvetica", 14)
         self.messageBox['relief'] = SUNKEN
         self.messageBox['width'] = 48
-        # self.messageBox['height'] = 11 Good for Mac
-        self.messageBox['height'] = 8
+        self.messageBox['height'] = self.height
+
+    def textBoxHeight(self):
+        if system() == 'Darwin':
+            return 11
+        else:
+            return 8
 
     def introMSG(self, messageDisplay):
 
